@@ -1,51 +1,102 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Para alguien especial</title>
-  <style>
-    body {
-      background: #0f172a;
-      color: #e5e7eb;
-      font-family: Georgia, serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
+<meta charset="UTF-8">
+<title>Para ti</title>
 
-    .mensaje {
-      max-width: 600px;
-      font-size: 1.2rem;
-      line-height: 1.8;
-      animation: aparecer 3s ease;
-    }
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(#fdf6f0, #fdebd3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Georgia', serif;
+}
 
-    @keyframes aparecer {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
+.garden {
+  position: relative;
+  width: 400px;
+  height: 400px;
+}
+
+.flower {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #f4a261;
+  position: absolute;
+  cursor: pointer;
+  transition: transform 1s ease;
+}
+
+.center {
+  width: 120px;
+  height: 120px;
+  background: #e76f51;
+  top: 140px;
+  left: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  position: absolute;
+  width: 250px;
+  text-align: center;
+  top: 430px;
+  opacity: 0;
+  transition: opacity 1s ease;
+  font-size: 16px;
+  color: #5a3e2b;
+}
+
+.show {
+  opacity: 1;
+}
+
+.rotate {
+  transform: rotate(360deg);
+}
+
+/* flores alrededor */
+.f1 { top: 0; left: 160px; }
+.f2 { top: 80px; right: 0; }
+.f3 { bottom: 80px; right: 0; }
+.f4 { bottom: 0; left: 160px; }
+.f5 { bottom: 80px; left: 0; }
+.f6 { top: 80px; left: 0; }
+
+</style>
 </head>
+
 <body>
 
-  <div class="mensaje">
-    <p>
-      A veces no se trata de insistir,<br>
-      sino de dejar constancia de lo que fue verdadero.
-    </p>
-    <p>
-      Esto no pide nada.<br>
-      Solo existe.
-    </p>
+<div class="garden">
+  <div class="flower center" onclick="showMessage()"></div>
+
+  <div class="flower f1"></div>
+  <div class="flower f2"></div>
+  <div class="flower f3"></div>
+  <div class="flower f4"></div>
+  <div class="flower f5"></div>
+  <div class="flower f6"></div>
+
+  <div id="message" class="text">
+    A veces, lo bonito no está en quedarse,<br>
+    sino en haber coincidido con luz,<br>
+    aunque solo haya sido un momento.
   </div>
+</div>
+
+<script>
+function showMessage() {
+  document.querySelector('.center').classList.toggle('rotate');
+  document.getElementById('message').classList.toggle('show');
+}
+</script>
 
 </body>
 </html>
