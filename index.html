@@ -17,63 +17,70 @@
 
   .container {
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: 420px;
+    height: 420px;
   }
 
+  /* ===== GERBERA ===== */
   .flower {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    background: radial-gradient(circle at center, #ffcc00 30%, #ff6f61 70%);
     position: absolute;
+    width: 80px;
+    height: 80px;
     cursor: pointer;
     transition: transform 0.8s ease;
-  }
-
-  .flower::before {
-    content: "";
-    position: absolute;
-    inset: -15px;
-    border-radius: 50%;
-    background:
-      repeating-conic-gradient(
-        #ff9f1c 0deg 20deg,
-        #ff6f61 20deg 40deg
-      );
-    z-index: -1;
   }
 
   .flower.rotate {
     transform: rotateY(180deg) scale(1.05);
   }
 
-  /* Posiciones */
-  .center {
-    top: 165px;
-    left: 165px;
-    width: 90px;
-    height: 90px;
+  /* pétalos */
+  .flower::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #ff8c42;
+    box-shadow:
+      0 -35px #ff8c42,
+      0 35px #ff8c42,
+      35px 0 #ff8c42,
+      -35px 0 #ff8c42,
+      25px 25px #ff8c42,
+      -25px 25px #ff8c42,
+      25px -25px #ff8c42,
+      -25px -25px #ff8c42;
   }
 
-  .f1 { top: 20px; left: 165px; }
-  .f2 { top: 80px; left: 280px; }
-  .f3 { top: 200px; left: 310px; }
-  .f4 { top: 310px; left: 200px; }
-  .f5 { top: 250px; left: 60px; }
+  /* centro */
+  .flower::after {
+    content: "";
+    position: absolute;
+    inset: 22px;
+    background: #ffcc00;
+    border-radius: 50%;
+  }
+
+  /* posiciones */
+  .center { top: 170px; left: 170px; transform: scale(1.2); }
+  .f1 { top: 20px; left: 170px; }
+  .f2 { top: 80px; left: 300px; }
+  .f3 { top: 210px; left: 330px; }
+  .f4 { top: 330px; left: 210px; }
+  .f5 { top: 260px; left: 60px; }
   .f6 { top: 90px; left: 40px; }
 
-  /* Mensaje */
+  /* texto */
   .text {
     position: absolute;
-    bottom: -120px;
+    bottom: -130px;
     width: 100%;
     text-align: center;
     font-size: 16px;
     color: #5a3e2b;
     opacity: 0;
     transition: opacity 0.6s ease;
-    padding: 0 10px;
+    padding: 0 15px;
   }
 
   .text.show {
@@ -87,7 +94,6 @@
 <div class="container">
 
   <div class="flower center" onclick="showMessage(0)"></div>
-
   <div class="flower f1" onclick="showMessage(1)"></div>
   <div class="flower f2" onclick="showMessage(2)"></div>
   <div class="flower f3" onclick="showMessage(3)"></div>
@@ -101,26 +107,19 @@
 
 <script>
 const messages = [
-  "Que tu camino esté lleno de paz. Eso, por sí solo, ya sería suficiente para mí.",
-
-  "Me importas más de lo que sé decir, y por eso deseo que siempre te elijas.",
-
-  "Ojalá la vida te trate con la ternura que tú sueles regalar sin darte cuenta.",
-
-  "No todo lo bonito se queda, pero todo lo bonito deja algo bueno.",
-
-  "Que encuentres claridad, calma y un lugar donde tu corazón descanse.",
-
-  "Gracias por confiarme partes de ti. Eso no se olvida.",
-
-  "Si alguna vez dudas, recuerda que mereces cosas que no te hagan dudar."
+  "Que tu camino esté lleno de calma. Eso ya sería un regalo enorme.",
+  "Me importas, y por eso deseo que siempre te cuides.",
+  "Ojalá la vida te trate con la ternura que tú regalas.",
+  "No todo lo bonito se queda, pero todo deja algo bueno.",
+  "Que encuentres paz en tus decisiones.",
+  "Gracias por confiarme partes de ti.",
+  "Mereces cosas que no te hagan dudar."
 ];
 
 function showMessage(index) {
   document.querySelectorAll('.flower').forEach(f =>
     f.classList.remove('rotate')
   );
-
   document.querySelectorAll('.flower')[index].classList.add('rotate');
 
   const box = document.getElementById('message');
