@@ -2,99 +2,130 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Para ti</title>
+<title>Gerberas</title>
 
 <style>
-body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(#fdf6f0, #fdebd3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Georgia', serif;
-}
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(180deg, #fff6e5, #ffe9c6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Georgia', serif;
+  }
 
-.garden {
-  position: relative;
-  width: 400px;
-  height: 400px;
-}
+  .container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+  }
 
-.flower {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: #f4a261;
-  position: absolute;
-  cursor: pointer;
-  transition: transform 1s ease;
-}
+  .flower {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, #ffcc00 30%, #ff6f61 70%);
+    position: absolute;
+    cursor: pointer;
+    transition: transform 0.8s ease;
+  }
 
-.center {
-  width: 120px;
-  height: 120px;
-  background: #e76f51;
-  top: 140px;
-  left: 140px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  .flower::before {
+    content: "";
+    position: absolute;
+    inset: -15px;
+    border-radius: 50%;
+    background:
+      repeating-conic-gradient(
+        #ff9f1c 0deg 20deg,
+        #ff6f61 20deg 40deg
+      );
+    z-index: -1;
+  }
 
-.text {
-  position: absolute;
-  width: 250px;
-  text-align: center;
-  top: 430px;
-  opacity: 0;
-  transition: opacity 1s ease;
-  font-size: 16px;
-  color: #5a3e2b;
-}
+  .flower.rotate {
+    transform: rotateY(180deg) scale(1.05);
+  }
 
-.show {
-  opacity: 1;
-}
+  /* Posiciones */
+  .center {
+    top: 165px;
+    left: 165px;
+    width: 90px;
+    height: 90px;
+  }
 
-.rotate {
-  transform: rotate(360deg);
-}
+  .f1 { top: 20px; left: 165px; }
+  .f2 { top: 80px; left: 280px; }
+  .f3 { top: 200px; left: 310px; }
+  .f4 { top: 310px; left: 200px; }
+  .f5 { top: 250px; left: 60px; }
+  .f6 { top: 90px; left: 40px; }
 
-/* flores alrededor */
-.f1 { top: 0; left: 160px; }
-.f2 { top: 80px; right: 0; }
-.f3 { bottom: 80px; right: 0; }
-.f4 { bottom: 0; left: 160px; }
-.f5 { bottom: 80px; left: 0; }
-.f6 { top: 80px; left: 0; }
+  /* Mensaje */
+  .text {
+    position: absolute;
+    bottom: -120px;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    color: #5a3e2b;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    padding: 0 10px;
+  }
 
+  .text.show {
+    opacity: 1;
+  }
 </style>
 </head>
 
 <body>
 
-<div class="garden">
-  <div class="flower center" onclick="showMessage()"></div>
+<div class="container">
 
-  <div class="flower f1"></div>
-  <div class="flower f2"></div>
-  <div class="flower f3"></div>
-  <div class="flower f4"></div>
-  <div class="flower f5"></div>
-  <div class="flower f6"></div>
+  <div class="flower center" onclick="showMessage(0)"></div>
 
-  <div id="message" class="text">
-    A veces, lo bonito no está en quedarse,<br>
-    sino en haber coincidido con luz,<br>
-    aunque solo haya sido un momento.
-  </div>
+  <div class="flower f1" onclick="showMessage(1)"></div>
+  <div class="flower f2" onclick="showMessage(2)"></div>
+  <div class="flower f3" onclick="showMessage(3)"></div>
+  <div class="flower f4" onclick="showMessage(4)"></div>
+  <div class="flower f5" onclick="showMessage(5)"></div>
+  <div class="flower f6" onclick="showMessage(6)"></div>
+
+  <div id="message" class="text"></div>
+
 </div>
 
 <script>
-function showMessage() {
-  document.querySelector('.center').classList.toggle('rotate');
-  document.getElementById('message').classList.toggle('show');
+const messages = [
+  "Que tu camino esté lleno de paz. Eso, por sí solo, ya sería suficiente para mí.",
+
+  "Me importas más de lo que sé decir, y por eso deseo que siempre te elijas.",
+
+  "Ojalá la vida te trate con la ternura que tú sueles regalar sin darte cuenta.",
+
+  "No todo lo bonito se queda, pero todo lo bonito deja algo bueno.",
+
+  "Que encuentres claridad, calma y un lugar donde tu corazón descanse.",
+
+  "Gracias por confiarme partes de ti. Eso no se olvida.",
+
+  "Si alguna vez dudas, recuerda que mereces cosas que no te hagan dudar."
+];
+
+function showMessage(index) {
+  document.querySelectorAll('.flower').forEach(f =>
+    f.classList.remove('rotate')
+  );
+
+  document.querySelectorAll('.flower')[index].classList.add('rotate');
+
+  const box = document.getElementById('message');
+  box.innerText = messages[index];
+  box.classList.add('show');
 }
 </script>
 
